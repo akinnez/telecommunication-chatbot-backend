@@ -1,6 +1,6 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
-import getEmbedding from './embedding';
+import { getEmbedding } from './embedding';
 import cosineSimilarity from './cosineSimilarity';
 
 dotenv.config();
@@ -9,8 +9,8 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-async function searchKnowledgeBase(userQuery, n = 3) {
-  const embedding = await getEmbedding(userQuery);
+async function searchKnowledgeBase(apiKey, userQuery, n = 3) {
+  const embedding = await getEmbedding(apiKey, userQuery);
   const client = await pool.connect();
 
   try {

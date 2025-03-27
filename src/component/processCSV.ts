@@ -1,6 +1,6 @@
 import fs from 'fs';
 import csv from 'csv-parser';
-import getEmbedding from './embedding';
+import { getEmbedding } from './embedding';
 
 async function processCSV(inputFile, outputFile) {
   const results = [];
@@ -10,7 +10,7 @@ async function processCSV(inputFile, outputFile) {
     .pipe(csv())
     .on('headers', (headerList) => headers.push(...headerList, 'ada_embedding'))
     .on('data', async (row) => {
-      row['ada_embedding'] = JSON.parse(await getEmbedding(row['combined']));
+      // row['ada_embedding'] = JSON.parse(await getEmbedding(row['combined']));
       results.push(row);
     })
     .on('end', () => {

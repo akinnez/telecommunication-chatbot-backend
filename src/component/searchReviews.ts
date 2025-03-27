@@ -1,16 +1,22 @@
 import fs from 'fs';
 import csv from 'csv-parser';
-import getEmbedding from './embedding';
+import { getEmbedding } from './embedding';
 import cosineSimilarity from './cosineSimilarity';
 
-async function searchReviews(productDescription) {
-  const embedding = await getEmbedding(productDescription);
+async function searchReviews(
+  apiKey: string,
+  productDescription: string,
+  resolve: any,
+  reject: any,
+) {
+  const embedding = await getEmbedding(apiKey, productDescription);
   const results = [];
   const headers = [];
-  const inputFile = 'output/embedded_1k_reviews.csv';
+  const inputFile = 'faq_data.csv';
   const n = 3;
 
-  fs.createReadStream(inputFile)
+  return fs
+    .createReadStream(inputFile)
     .pipe(csv())
     .on('headers', (headerList) => headers.push(...headerList, 'similarities'))
     .on('data', (row) => {
@@ -22,6 +28,10 @@ async function searchReviews(productDescription) {
       results.sort((a, b) => b['similarities'] - a['similarities']);
       const topResults = results.slice(0, n);
       console.log('Top Reviews:', topResults);
+      resolve(topResults);
+    })
+    .on('error', (error) => {
+      reject(error);
     });
 }
 
