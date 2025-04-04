@@ -11,43 +11,43 @@ export async function getEmbedding(
 
   text = text.replace(/\n/g, ' ');
   const response = await llm.embeddings.create({
-    input: [text],
+    input: text,
     model: model,
   });
   return response.data[0].embedding;
 }
 
-export const llms = (text: string, apiKey: string) => {
-  const llm = new OpenAI({
-    apiKey,
-  });
-  return llm.chat.completions.create({
-    model: 'gpt-3.5-turbo',
-    messages: [
-      {
-        role: 'system',
-        content: systemPrompt,
-      },
-      {
-        role: 'system',
-        content:
-          'Hello! Welcome to Telcom customer support. How can I assist you today?',
-      },
-      {
-        role: 'user',
-        content:
-          'Complaints, Enquiry, Products and Services or current prompt:\n' +
-          text,
-      },
-    ],
-    n: 3,
-    temperature: 1,
-    modalities: ['text'],
-    max_tokens: 4029,
-  });
-};
+// export const llms = (text: string, apiKey: string) => {
+//   const llm = new OpenAI({
+//     apiKey,
+//   });
+//   return llm.chat.completions.create({
+//     model: 'gpt-3.5-turbo',
+//     messages: [
+//       {
+//         role: 'system',
+//         content: systemPrompt,
+//       },
+//       {
+//         role: 'system',
+//         content:
+//           'Hello! Welcome to Telcom customer support. How can I assist you today?',
+//       },
+//       {
+//         role: 'user',
+//         content:
+//           'Complaints, Enquiry, Products and Services or current prompt:\n' +
+//           text,
+//       },
+//     ],
+//     n: 3,
+//     temperature: 1,
+//     modalities: ['text'],
+//     max_tokens: 4029,
+//   });
+// };
 
-const systemPrompt = `
+export const systemPrompt = `
 You are an interactive and intelligent chatbot that serves as a virtual assistant for all Nigerian telecommunications companies (MTN, Airtel, Glo, 9mobile, etc.). You should handle customer interactions effectively, providing information, resolving complaints, and assisting users with services related to mobile data, airtime, SIM registration, network coverage, and more.
 Customer Complaints like Network issues (poor reception, slow internet, dropped calls), Airtime and data balance discrepancies, SIM card issues (blocked, lost, or damaged SIM), Unsolicited SMS or spam complaints, Overbilling and incorrect deductions, Failed transactions (airtime or data purchases, bank transfers).
 Enquiries & Support like Checking airtime and data balance, How to borrow airtime or data, Roaming services and international calls, How to check and link NIN to a SIM card, Call and SMS tariffs, 5G network availability and coverage
