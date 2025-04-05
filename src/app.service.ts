@@ -13,7 +13,6 @@ export class AppService {
 
   async askQuestion(question: string) {
     const document = await this.loader.load();
-
     try {
       return searchReviews(document, process.env['Project_APIkey'], question);
     } catch (error) {

@@ -11,25 +11,17 @@ import { ChatOpenAI } from '@langchain/openai';
 import { systemPrompt } from './systemPrompt';
 import { ToolNode } from '@langchain/langgraph/prebuilt';
 import { graphBuilder } from './graphBuilder';
-import { ConversationChain } from 'langchain/chains';
+// import { ConversationChain } from 'langchain/chains';
 
-export function toolCalling(
-  retrieve: DynamicStructuredTool,
-  llm: ChatOpenAI,
-  memory: any,
-) {
+export function toolCalling(retrieve: DynamicStructuredTool, llm: ChatOpenAI) {
   async function queryOrRespond(state: typeof MessagesAnnotation.State) {
     const llmWithTools = llm.bindTools([retrieve]);
     const response = await llmWithTools.invoke(state.messages);
-    console.log(response, state.messages);
-
     return { messages: [response] };
   }
   const tools = new ToolNode([retrieve]);
 
   async function generate(state: typeof MessagesAnnotation.State) {
-    console.log(state);
-
     // Get generated ToolMessages
     let recentToolMessages = [];
     for (let i = state['messages'].length - 1; i >= 0; i--) {
@@ -56,15 +48,9 @@ export function toolCalling(
       new SystemMessage(systemMessageContent),
       ...conversationMessages,
     ];
-    console.log(prompt);
     // Run
 
-    const chain = new ConversationChain({
-      llm,
-      memory,
-    });
-    const response = await chain.call(prompt);
-    console.log(response);
+    const response = await llm.invoke(prompt);
     return { messages: [response] };
   }
 
