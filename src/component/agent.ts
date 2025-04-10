@@ -2,7 +2,7 @@ import { BaseMessage } from '@langchain/core/messages';
 
 import { v4 as uuidv4 } from 'uuid';
 
-export async function agentStream(agent: any, message: any) {
+export async function agentStream(graph: any, message: any) {
   let inputs = { messages: [{ role: 'user', content: message }] };
   let lastMessage!: BaseMessage;
 
@@ -11,8 +11,9 @@ export async function agentStream(agent: any, message: any) {
     streamMode: 'values' as const,
   };
 
-  for await (const step of await agent.stream(inputs, threadConfig)) {
-    lastMessage = step.messages[step.messages.length - 1];
+  for await (const step of await graph.invoke(inputs, threadConfig)) {
+    lastMessage = step.messages.at(-1);
   }
+
   return lastMessage;
 }

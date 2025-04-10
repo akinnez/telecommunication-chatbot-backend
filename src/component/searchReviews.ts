@@ -7,6 +7,8 @@ import { retrieverTools } from './retrievalTool';
 import { agentStream } from './agent';
 import { toolCalling } from './toolCalling';
 import { MessageContent } from '@langchain/core/messages';
+import { SMALL_TALK_QA } from 'src/small-talk';
+import { smalltalkTools } from './smallTalkTool';
 
 async function searchReviews(
   documents: Document[],
@@ -19,13 +21,24 @@ async function searchReviews(
   });
   const splitDocuments: Document[] =
     await textSplitter.splitDocuments(documents);
+
   const embeddings = new OpenAIEmbeddings({
     openAIApiKey: apiKey,
     model: 'text-embedding-3-small',
   });
+
+  const smallTalkStore = await MemoryVectorStore.fromTexts(
+    SMALL_TALK_QA.map((item) => item.question),
+    SMALL_TALK_QA,
+    new OpenAIEmbeddings({
+      openAIApiKey: apiKey,
+      model: 'text-embedding-3-small',
+    }),
+  );
   const vectorStore = new MemoryVectorStore(embeddings);
   await vectorStore.addDocuments(splitDocuments);
   const retrieve = retrieverTools(vectorStore);
+  const smallTalkTools = smalltalkTools(smallTalkStore);
 
   const model = new ChatOpenAI({
     openAIApiKey: apiKey,
@@ -33,10 +46,10 @@ async function searchReviews(
     maxRetries: 3,
     timeout: 10000,
     n: 1,
-    temperature: 0.5,
+    temperature: 0.7,
   });
 
-  const graph = toolCalling(retrieve, model);
+  const graph = toolCalling(smallTalkTools, retrieve, model);
 
   const agents = agentStream(graph, message);
 

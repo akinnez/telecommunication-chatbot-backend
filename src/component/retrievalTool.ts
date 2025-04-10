@@ -18,7 +18,8 @@ export function retrieverTools(store: VectorStore): DynamicStructuredTool<any> {
     },
     {
       name: 'retrieve',
-      description: 'Retrieve information related to a query.',
+      description:
+        'Use this tool when the user asks a telecom-related question from the FAQ dataset.',
       schema: retrieveSchema,
       responseFormat: 'question_and_answer',
     },

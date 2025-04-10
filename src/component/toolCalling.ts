@@ -11,15 +11,20 @@ import { ChatOpenAI } from '@langchain/openai';
 import { systemPrompt } from './systemPrompt';
 import { ToolNode } from '@langchain/langgraph/prebuilt';
 import { graphBuilder } from './graphBuilder';
-// import { ConversationChain } from 'langchain/chains';
 
-export function toolCalling(retrieve: DynamicStructuredTool, llm: ChatOpenAI) {
+export function toolCalling(
+  smalltalk: DynamicStructuredTool,
+  retrieve: DynamicStructuredTool,
+  llm: ChatOpenAI,
+) {
   async function queryOrRespond(state: typeof MessagesAnnotation.State) {
-    const llmWithTools = llm.bindTools([retrieve]);
+    const llmWithTools = llm.bindTools([retrieve, smalltalk]);
     const response = await llmWithTools.invoke(state.messages);
+
     return { messages: [response] };
   }
-  const tools = new ToolNode([retrieve]);
+
+  const tools = new ToolNode([retrieve, smalltalk]);
 
   async function generate(state: typeof MessagesAnnotation.State) {
     // Get generated ToolMessages
@@ -36,7 +41,6 @@ export function toolCalling(retrieve: DynamicStructuredTool, llm: ChatOpenAI) {
 
     // Format into prompt
     const docsContent = toolMessages.map((doc) => doc.content).join('\n');
-    const systemMessageContent = systemPrompt + '\n\n' + `${docsContent}`;
 
     const conversationMessages = state.messages.filter(
       (message) =>
@@ -44,10 +48,18 @@ export function toolCalling(retrieve: DynamicStructuredTool, llm: ChatOpenAI) {
         message instanceof SystemMessage ||
         (message instanceof AIMessage && message.tool_calls.length == 0),
     );
+    const systemMessageContent =
+      systemPrompt(
+        `${conversationMessages[conversationMessages.length - 1]?.content}`,
+      ) +
+      '\n\n' +
+      `${docsContent}`;
+
     const prompt = [
       new SystemMessage(systemMessageContent),
       ...conversationMessages,
     ];
+
     // Run
 
     const response = await llm.invoke(prompt);

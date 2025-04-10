@@ -4,7 +4,8 @@ import {
   START,
   StateGraph,
 } from '@langchain/langgraph';
-import { ToolNode, toolsCondition } from '@langchain/langgraph/prebuilt';
+import { ToolNode } from '@langchain/langgraph/prebuilt';
+import { customToolsCondition } from './customeToolConditios';
 
 export function graphBuilder(
   queryOrRespond: any,
@@ -16,15 +17,13 @@ export function graphBuilder(
     .addNode('tools', tools)
     .addNode('generate', generate);
 
-  graphBuilder.addConditionalEdges('queryOrRespond', toolsCondition, {
-    END,
-    tools: 'tools',
-  });
+  graphBuilder.addConditionalEdges('queryOrRespond', customToolsCondition);
 
   graphBuilder
     .addEdge(START, 'queryOrRespond')
     .addEdge('tools', 'generate')
-    .addEdge('generate', END);
+    .addEdge('generate', 'queryOrRespond')
+    .addEdge('queryOrRespond', END);
 
   return graphBuilder;
 }
