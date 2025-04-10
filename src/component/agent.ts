@@ -11,7 +11,7 @@ export async function agentStream(graph: any, message: any) {
     streamMode: 'values' as const,
   };
 
-  for await (const step of await graph.invoke(inputs, threadConfig)) {
+  for await (const step of await graph.stream(inputs, threadConfig)) {
     lastMessage = step.messages.at(-1);
   }
 
