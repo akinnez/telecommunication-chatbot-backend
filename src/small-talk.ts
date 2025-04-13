@@ -8,6 +8,14 @@ export const SMALL_TALK_QA = [
     question: 'how is it going',
     answer: 'its going smooth! 🚀 What can I do for you?',
   },
+  {
+    question: 'how are you',
+    answer: "I'm cool, Thank you. How can i assist you?",
+  },
+  {
+    question: 'how are you doing',
+    answer: "I'm doing great, Thank you. How can i assist you?",
+  },
   { question: "what's up", answer: 'Not much, just waiting to help you. 😊' },
   {
     question: 'good morning',
@@ -20,6 +28,10 @@ export const SMALL_TALK_QA = [
   {
     question: 'good evening',
     answer: 'Good evening!, How can I help today? 😎',
+  },
+  {
+    question: 'good day',
+    answer: 'Good day!, How can I help today? 😎',
   },
   {
     question: 'I need help with something',
@@ -56,15 +68,5 @@ export const SMALL_TALK_QA = [
   {
     question: 'Is this customer support?',
     answer: 'Yes, it is. What can i do for you today?',
-  },
-  {
-    question: 'What services do you offer?',
-    answer:
-      'I offers wide range of telecommunication related services. Services which includes voice communication (landline and mobile phones), data and internet services (broadband, fiber optics, wireless internet), network infrastructure (tower installations, routing systems), and media and entertainment (cable TV, video streaming). Would you like detailed breakdown on telecommunication services?',
-  },
-  {
-    question: 'What products do you offer?',
-    answer:
-      'I offers wide range of telecommunication related products. Products which includes phones, modems, and routers, as well as services like broadband internet, mobile data, and VoIP. Would you like detail breakdown on telecommunication products?',
   },
 ];

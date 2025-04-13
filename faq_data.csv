@@ -2,7 +2,11 @@ Question,Answer
 What is MTN Data bundle?,MTN Data bundles are affordable data plans designed to give access to the internet through data enabled devices. It is usually within a defined unit of bytes and at a pre-determined price for a definite period and MTN has a robust bouquet of bundles that suits all lifestyle.
 Who can subscribe to MTN Data bundle?,All MTN Customers can subscribe to any MTN Data bundle.
 What are the different MTN Data bundle plans available?,"They are Daily, Weekly, Monthly, Bi-monthly, Quarterly, Bi-annually, and Yearly."
-How do I subscribe to MTN Data bundles?,A. You can subscribe to any MTN data bundles via the following channels:USSD: Dialling *321*1# or *904# and selecting your preferred data plan.B. SMS: Sending the bundle plan keyword to 312.myMTN App: Text myMTN to 5018 to download the app.myMTN WebMTN TopIt/VTUZigiFacebook (Mobile Center)Google
+How do I subscribe to MTN Data bundles?,
+A. You can subscribe to any MTN data bundles via the following channels:
+USSD: Dialling *3121# and selecting your preferred data plan.
+B. SMS: Sending the bundle plan keyword to 312.
+myMTN App: Text myMTN to 5018 to download the app.myMTN WebMTN TopIt/VTUZigiFacebook (Mobile Center)Google
 "I received a pop-up menu to choose either Auto-renewal, One-off, or Buy for a Friend when activating a data bundle. What does this mean?","The pop-up menu is a feature that allows you to set your data bundle on Auto-renew or One-off purchase, and to Buy for a Friend:Auto-renew Purchase means that your data bundle will automatically renew after expiry provided you have enough airtime on your line.One-off Purchase means that your data bundle will not renew after expiry date even with the sufficient airtime.Buy for a Friend option allows you to buy a data bundle for another line with your airtime."
 "If I exit the pop-up menu or it times out before selecting an option, will my data bundle be on Auto-renewal or One-off option?","If you are buying a data bundle via SMS and it exits the pop-up menu, or it times out before selecting an option, the data bundle would be activated as One�off purchase. But, if you are buying the bundle via USSD you will not be able to proceed to buy the data bundle until you select an option of either one-off, auto-renewal or buy for a friend."
 "If my data bundle is activated on One-off, will I be able to opt in for Auto-renew or renew the bundle?","Yes, you will be able to opt in for Auto-renewal or renew the bundle by sending R+bundle code to 312.Example: If you have an active 100MB daily bundle that is on One-off option, you will be able to renew it by sending R104 to 312."
@@ -249,11 +253,59 @@ How can I return my faulty device?,You can log a complaint about your damaged de
 What's the warranty on my device?,"Our broadband devices come with a one-year warranty. If your device is found to be defective within the warranty period, we will repair or replace it (as applicable) free of charge. Log a complaint about your damaged device on our Faulty Device portal. Please keep in mind that the warranty does not cover damage caused by accidents, misuse, or unauthorized modifications."
 Can I get a refund if I do not want my device again?,"We do not offer refunds items you are no longer interested in as per our return policy. However, we do offer warranty repairs or replacements if your device is found to be faulty within the warranty period. Please refer to our return policy for more information on our warranty terms and conditions. For more information, you can contact our customer support team via email at customercare.ng@mtn.com or Dial 300 from an MTN line or 08031000300 from any other network for all inquiries."
 What are the Requirements for a valid return on eShop?,"If your device is found to be defective within the warranty period, we will repair or replace it (as applicable) free of charge. However, please keep in mind that the warranty does not cover damage caused by accidents, misuse, or unauthorized modifications."
-Hi,"Hello, How can i assist you?"
-Hello,"Hello, How can i assist you?"
-How are you?,"I'm cool, Thank you. How can i assist you?"
-How are you doing?,"I'm doing great, Thank you. How can i assist you?"
-Good morning,"Good Morning to you, How can i assist you?"
-Good afternoon,"Good afternoon to you, How can i assist you?"
-Good evening,"Good evening to you, How can i assist you?"
-Good day,"Good day, How can i assist you?"
+What services do you offer?, "I offer the following services:  
+A. Voice Services
+- Local and international calling
+- Voicemail
+- Call forwarding, waiting, and conferencing
+
+B. Data Services
+- 3G, 4G, 5G mobile internet
+- Mobile hotspots/tethering
+- Roaming data plans
+
+C. Messaging Services
+- SMS and MMS
+- Rich Communication Services (RCS)
+- Bulk SMS for businesses
+
+D. Value-Added Services (VAS)
+- Caller tunes
+- Mobile TV/Video streaming
+- Cloud storage and backup
+- Emergency services (like SOS or panic alert)
+
+E. Roaming and International Services
+- International calling & texting
+- International roaming packs
+- eSIM support for global travelers
+"
+What products do you offer?," I offer the following products:
+A. SIM Cards
+- Prepaid and postpaid SIMs
+- eSIMs (digital SIMs)
+- Data-only SIMs for tablets/routers
+
+B. Mobile Devices
+- Smartphones and tablets
+- Feature phones
+- Mobile routers (MiFi devices)
+
+C. Wearables and Smart Devices
+- Smartwatches with SIM connectivity
+- IoT-enabled gadgets
+
+D. Accessories
+- Chargers, headphones, and power banks
+- Protective gear (cases, screen guards)
+
+E. Mobile Apps
+- Self-service apps for account management
+- Payment and recharge apps
+- Customer support chatbots
+
+F. Routers and Modems
+- 4G/5G routers
+- Dongles and data cards
+"
+

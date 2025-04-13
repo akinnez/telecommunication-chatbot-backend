@@ -22,8 +22,7 @@ export function graphBuilder(
   graphBuilder
     .addEdge(START, 'queryOrRespond')
     .addEdge('tools', 'generate')
-    .addEdge('generate', 'queryOrRespond')
-    .addEdge('queryOrRespond', END);
+    .addEdge('generate', END);
 
   return graphBuilder;
 }

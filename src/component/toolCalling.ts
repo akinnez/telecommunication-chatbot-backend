@@ -40,7 +40,17 @@ export function toolCalling(
     let toolMessages = recentToolMessages.reverse();
 
     // Format into prompt
+
     const docsContent = toolMessages.map((doc) => doc.content).join('\n');
+    if (!docsContent.trim()) {
+      return {
+        messages: [
+          new AIMessage(
+            "Hmm, I couldn't find any relevant telecom info to help with that. 📡 Could you rephrase or ask about specific services?",
+          ),
+        ],
+      };
+    }
 
     const conversationMessages = state.messages.filter(
       (message) =>
@@ -48,12 +58,10 @@ export function toolCalling(
         message instanceof SystemMessage ||
         (message instanceof AIMessage && message.tool_calls.length == 0),
     );
-    const systemMessageContent =
-      systemPrompt(
-        `${conversationMessages[conversationMessages.length - 1]?.content}`,
-      ) +
-      '\n\n' +
-      `${docsContent}`;
+    const systemMessageContent = systemPrompt(
+      `${conversationMessages[conversationMessages.length - 1]?.content}`,
+      docsContent,
+    );
 
     const prompt = [
       new SystemMessage(systemMessageContent),
@@ -63,6 +71,8 @@ export function toolCalling(
     // Run
 
     const response = await llm.invoke(prompt);
+    console.log(response, 'from response');
+
     return { messages: [response] };
   }
 

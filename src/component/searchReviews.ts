@@ -16,7 +16,7 @@ async function searchReviews(
   message: string,
 ) {
   const textSplitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 500,
+    chunkSize: 400,
     chunkOverlap: 50,
   });
   const splitDocuments: Document[] =
