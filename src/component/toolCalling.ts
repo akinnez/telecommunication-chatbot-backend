@@ -20,7 +20,6 @@ export function toolCalling(
   async function queryOrRespond(state: typeof MessagesAnnotation.State) {
     const llmWithTools = llm.bindTools([retrieve, smalltalk]);
     const response = await llmWithTools.invoke(state.messages);
-
     return { messages: [response] };
   }
 
@@ -38,10 +37,8 @@ export function toolCalling(
       }
     }
     let toolMessages = recentToolMessages.reverse();
-
-    // Format into prompt
-
     const docsContent = toolMessages.map((doc) => doc.content).join('\n');
+
     if (!docsContent.trim()) {
       return {
         messages: [
@@ -58,10 +55,8 @@ export function toolCalling(
         message instanceof SystemMessage ||
         (message instanceof AIMessage && message.tool_calls.length == 0),
     );
-    const systemMessageContent = systemPrompt(
-      `${conversationMessages[conversationMessages.length - 1]?.content}`,
-      docsContent,
-    );
+
+    const systemMessageContent = systemPrompt + '\n\n' + `${docsContent}`;
 
     const prompt = [
       new SystemMessage(systemMessageContent),
@@ -71,7 +66,6 @@ export function toolCalling(
     // Run
 
     const response = await llm.invoke(prompt);
-    console.log(response, 'from response');
 
     return { messages: [response] };
   }

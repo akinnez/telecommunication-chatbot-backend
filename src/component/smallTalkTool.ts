@@ -9,7 +9,7 @@ export function smalltalkTools(
 ): DynamicStructuredTool<any> {
   const retrieve = tool(
     async ({ query }) => {
-      const results = await smallTalkStore.similaritySearch(query, 1);
+      const results = await smallTalkStore.similaritySearch(query, 2);
       return results?.[0]?.metadata?.answer || 'Hey! 😊 How can I help?';
     },
     {

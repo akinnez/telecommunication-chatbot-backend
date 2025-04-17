@@ -7,14 +7,26 @@ dotenv.config();
 @Injectable()
 export class AppService {
   private loader: CSVLoader;
+  private document: any;
   constructor() {
     this.loader = new CSVLoader(join(__filename, '..', '..', 'faq_data.csv'));
+    this.loadDocs(this.loader);
   }
-
-  async askQuestion(question: string) {
-    const document = await this.loader.load();
+  async loadDocs(loader: CSVLoader) {
+    const docs = await loader.load();
+    this.document = docs.map((doc) => ({
+      ...doc,
+      answer: doc['pageContent'].replace(/\\n/g, '\n'), // normalize if needed
+    }));
+  }
+  async askQuestion(payload: { message: string; threadId: string }) {
     try {
-      return searchReviews(document, process.env['Project_APIkey'], question);
+      return await searchReviews(
+        this.document,
+        process.env['Project_APIkey'],
+        payload.message,
+        payload.threadId,
+      );
     } catch (error) {
       console.error('Error querying the model:', error);
       return 'An error occurred while processing your request.';

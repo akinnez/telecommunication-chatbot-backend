@@ -1,13 +1,11 @@
 import { BaseMessage } from '@langchain/core/messages';
 
-import { v4 as uuidv4 } from 'uuid';
-
-export async function agentStream(graph: any, message: any) {
+export async function agentStream(graph: any, message: any, thread_id: string) {
   let inputs = { messages: [{ role: 'user', content: message }] };
   let lastMessage!: BaseMessage;
 
   const threadConfig = {
-    configurable: { thread_id: uuidv4() },
+    configurable: { thread_id: thread_id },
     streamMode: 'values' as const,
   };
 

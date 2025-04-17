@@ -7,13 +7,15 @@ const retrieveSchema = z.object({ query: z.string() });
 export function retrieverTools(store: VectorStore): DynamicStructuredTool<any> {
   const retrieve = tool(
     async ({ query }) => {
-      const retrievedDocs = await store.similaritySearch(query, 0);
+      const retrievedDocs = await store.similaritySearch(query, 2);
+
       const serialized = retrievedDocs
         .map(
           (doc) =>
             `Source: ${doc.metadata.source}\nContent: ${doc.pageContent}`,
         )
         .join('\n');
+
       return [serialized, retrievedDocs];
     },
     {
